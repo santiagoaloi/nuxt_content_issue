@@ -1,42 +1,57 @@
-# Content v2 Minimal Starter
+# Content v2 / nuxt 3 
 
-Look at the [Content documentation](https://content.nuxt.com/) to learn more.
+Bug (potentially related to nitro) using `queryContent` in nuxt/content
 
 ## Setup
 
-Make sure to install the dependencies:
-
 ```bash
-# yarn
-yarn install
+santiago@macbook content-app % pnpm nuxi info
 
-# npm
-npm install
-
-# pnpm
-pnpm install
+------------------------------
+- Operating System: Darwin
+- Node Version:     v21.2.0
+- Nuxt Version:     3.10.3
+- CLI Version:      3.10.1
+- Nitro Version:    2.9.1
+- Package Manager:  pnpm@8.9.2
+- Builder:          -
+- User Config:      devtools, modules, content
+- Runtime Modules:  @nuxt/content@2.12.0
+- Build Modules:    -
+------------------------------
 ```
 
-## Development Server
-
-Start the development server on http://localhost:3000
+## Production build error:
 
 ```bash
-npm run dev
+[GET] "/api/query/yFRQI29ykM.1709594450379.json?_params=%7B%22first%22:true,%22where%22:%5B%7B%22_path%22:%22%2Fhello%22%7D%5D,%22sort%22:%5B%7B%22_file%22:1,%22$numeric%22:true%7D%5D%7D": 500
 ```
 
-## Production
 
-Build the application for production:
+## Json content:
 
-```bash
-npm run build
+
+```json
+{
+  "title": "Hello Content v2!",
+  "description": "The writing experience for Nuxt 3",
+  "category": "announcement"
+}
 ```
 
-Locally preview production build:
+## Vue SFC:
 
-```bash
-npm run preview
+
+```html
+<template>
+  <main>
+  {{  data  }}
+  </main>
+</template>
+
+<script setup lang="ts">
+const data = await queryContent('/hello').findOne()
+</script>
 ```
 
-Checkout the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
